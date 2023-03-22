@@ -5,6 +5,14 @@ pipeline {
             steps {
                 checkout scm
             }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
+                    dockerImage.push()
+                }
+            }
+        }
         }
     }
 }
