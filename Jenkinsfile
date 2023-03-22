@@ -11,7 +11,6 @@ pipeline {
             steps {
                 script {
                     def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
-                    dockerImage.push()
                 }
             }
         }
