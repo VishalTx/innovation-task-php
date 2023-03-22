@@ -5,6 +5,8 @@ pipeline {
             steps {
                 checkout scm
             }
+        
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -12,7 +14,6 @@ pipeline {
                     dockerImage.push()
                 }
             }
-        }
         }
     }
 }
