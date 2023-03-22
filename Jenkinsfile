@@ -14,5 +14,15 @@ pipeline {
                 }
             }
         }
+        stage('Push Docker Image') {
+  steps {
+    script {
+      docker.withRegistry("13.52.76.195:8085", "nexus-credentials") {
+        def dockerImage = docker.image("my-image:${env.BUILD_ID}")
+        dockerImage.push()
+      }
+    }
+  }
+}
     }
 }
