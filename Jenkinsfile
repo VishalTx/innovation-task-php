@@ -7,17 +7,23 @@ pipeline {
             }
         
         }
-        stage('Build Docker images') {
-            steps {
-                script {
-                    dockerCompose(
-                        down: true,
-                        up: true,
-                    yaml: 'compose.yml'
+       
+    stage('Build Docker images') {
+      steps {
+        script {
+          dockerCompose(
+            down: true,
+            up: true,
+            yaml: 'compose.yml'
           )
         }
       }
-    }
+    
+  }
+          
+        }
+      }
+    
         stage('Push Docker Image') {
   steps {
     script {
@@ -28,5 +34,4 @@ pipeline {
     }
   }
 }
-    }
-}
+
