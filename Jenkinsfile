@@ -7,13 +7,17 @@ pipeline {
             }
         
         }
-        stage('Build Docker Image') {
+        stage('Build Docker images') {
             steps {
                 script {
-                    def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
-                }
-            }
+                    dockerCompose(
+                        down: true,
+                        up: true,
+                    yaml: 'compose.yml'
+          )
         }
+      }
+    }
         stage('Push Docker Image') {
   steps {
     script {
