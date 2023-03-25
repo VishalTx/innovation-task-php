@@ -1,24 +1,24 @@
-# Use an official PHP runtime as a parent image
 FROM php:7.4-apache
 
+# Install dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libzip-dev \
+        unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql zip mysqli
+
+# Set up Apache
+RUN a2enmod rewrite
+
+# Copy application files
 WORKDIR /var/www/html
+COPY . .
 
-COPY . /var/www/html
+# Expose port
+EXPOSE 80
 
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
-    libpq-dev \
-    && docker-php-ext-install pdo_mysql pdo_pgsql zip
-
-EXPOSE 9090
-
-ENV MYSQL_HOST=localhost \
-    MYSQL_PORT=3306 \
-    MYSQL_DATABASE=my_database \
-    MYSQL_USER=my_user \
-    MYSQL_PASSWORD=my_password
-
-
+# Start Apache
 CMD ["apache2-foreground"]

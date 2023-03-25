@@ -26,6 +26,7 @@ services:
             MYSQL_ROOT_PASSWORD: satish
         volumes:
             - persistent:/var/lib/mysql
+            - . employee.sql:/docker-entrypoint-initdb.d/employee.sql
         networks:
             - php-net
     phpmyadmin:
@@ -33,7 +34,7 @@ services:
         links:
             - db
         ports:
-            - "8080:80"
+            - "5001:80"
         environment:
             PMA_HOST: db
         networks:
@@ -42,5 +43,4 @@ networks:
     php-net:
         driver: bridge
 volumes:
-persistent:
-
+    persistent:
