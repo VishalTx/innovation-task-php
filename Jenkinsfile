@@ -1,4 +1,4 @@
-@Library('docker') _
+
 
 pipeline{
 
