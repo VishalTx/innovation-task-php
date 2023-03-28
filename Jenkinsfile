@@ -19,9 +19,11 @@ pipeline{
         }
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                script {
+                    // Build the Docker image using Docker Compose
+                    dockerCompose(build: true, file: 'docker-compose.yml')
+                }
             }
         }
-        
-        }
     }
+}
