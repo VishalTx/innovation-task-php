@@ -21,7 +21,9 @@ pipeline{
             steps {
                 script {
                     // Build the Docker image using Docker Compose
+                    withEnv(['PATH+DOCKER=/usr/bin']) {
                     dockerCompose(build: true, file: 'docker-compose.yml')
+                    }
                 }
             }
         }
