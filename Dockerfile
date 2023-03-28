@@ -1,24 +1,13 @@
-FROM php:7.4-apache
+FROM php:7.2-apache
 
-# Install dependencies
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libzip-dev \
-        unzip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql zip mysqli
+RUN docker-php-ext-install mysqli pdo_mysql
 
-# Set up Apache
-RUN a2enmod rewrite
+RUN mkdir /app \
+ && mkdir /app/php-mysql-demo \
+ && mkdir /app/php-mysql-demo/www
 
-# Copy application files
-WORKDIR /var/www/html
-COPY . .
+COPY . /app/php-mysql-demo/www/
 
-# Expose port
-EXPOSE 80
-
-# Start Apache
-CMD ["apache2-foreground"]
+RUN cp -r /app/php-mysql-demo/www/* /var/www/html/.

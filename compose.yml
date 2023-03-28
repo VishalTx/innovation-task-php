@@ -1,46 +1,50 @@
-version: "3.1"
+version: "2"
 services:
-    web:
-        image: php:7.4-apache
-        command: >
-            /bin/bash -c "
-                docker-php-ext-install mysqli;
-                apache2-foreground;"
-        ports:
-            - "5000:80"
-        volumes:
-            - .:/var/www/html/
-        links:
-            - db
-        networks:
-            - php-net
-    db:
-        image: mysql:8.0
-        container_name: mysql-app
-        ports:
-            - "3306:3306"
-        environment:
-            MYSQL_DATABASE: demo_db
-            MYSQL_USER: satish
-            MYSQL_PASSWORD: satish
-            MYSQL_ROOT_PASSWORD: satish
-        volumes:
-            - persistent:/var/lib/mysql
-            - . employee.sql:/docker-entrypoint-initdb.d/employee.sql
-        networks:
-            - php-net
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin:latest
-        links:
-            - db
-        ports:
-            - "5001:80"
-        environment:
-            PMA_HOST: db
-        networks:
-            - php-net
+  php:
+    build:
+      context: .
+    image: php-mysql-demo:1.0.0
+    networks:
+      - frontend
+      - backend
+    environment:
+      - MYSQL_HOST=mysql-app
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DB=demo_db
+    volumes:
+      - .:/var/www/html/
+      - ./employees.sql:/docker-entrypoint-initdb.d/employees.sql
+    ports:
+      - "5000:80"
+    container_name: php-app
+  mysql:
+    image: mysql:5.7
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=demo_db
+    container_name: mysql-app
+    volumes:
+      - .:/var/www/html/
+      - ./employees.sql:/docker-entrypoint-initdb.d/employees.sql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    ports:
+      - "5001:80"
+    environment:
+      - PMA_HOST=mysql-app
+      - PMA_PORT= 3306
+    volumes:
+      - /sessions
+    container_name: phpmyadmin-app
 networks:
-    php-net:
-        driver: bridge
-volumes:
-    persistent:
+  frontend:
+  backend:
