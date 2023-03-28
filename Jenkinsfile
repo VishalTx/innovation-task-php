@@ -19,7 +19,7 @@ pipeline{
         }
         stage('Build') {
             steps {
-                sh 'cd /root/php-mysql-phpmyadmin'
+                // sh 'cd /root/php-mysql-phpmyadmin'
                 sh 'docker-compose build'
                 // script {
                 //     // Build the Docker image using Docker Compose
