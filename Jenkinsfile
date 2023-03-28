@@ -15,5 +15,13 @@ pipeline{
                 }
             }
         }
+        stage('Build') {
+            steps {
+                script {
+                    // Build the Docker image using Docker Compose
+                    dockerCompose(build: true, file: 'docker-compose.yml')
+                }
+            }
+        }
     }
 }
