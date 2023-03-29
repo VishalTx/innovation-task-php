@@ -1,7 +1,12 @@
 pipeline{
 
     agent any 
+    
+    environment {
 
+        IMAGE_TAG = "${env.BUILD_NUMBER}"
+    }
+    
     stages{
 
         stage('Git Checkout'){
