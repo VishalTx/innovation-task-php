@@ -1,5 +1,3 @@
-
-
 pipeline{
 
     agent any 
@@ -19,13 +17,10 @@ pipeline{
         }
         stage('Build') {
             steps {
-                // sh 'cd /root/php-mysql-phpmyadmin'
-                sh "docker-compose up -d --build --no-deps --remove-orphans"
-                // script {
-                //     // Build the Docker image using Docker Compose
-                //     withEnv(['PATH+DOCKER=/usr/bin']) {
-                //     dockerCompose(build: true, file: 'docker-compose.yml')
-                //     }
+                
+                def buildNumber = env.BUILD_NUMBER ?: 'latest'
+                sh "docker-compose up -d --build --no-deps --remove-orphans --build-arg BUILD_NUMBER=${buildNumber}"
+                
                 }
             }
         }
