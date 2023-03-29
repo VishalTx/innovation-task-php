@@ -3,7 +3,7 @@ services:
   php:
     build:
       context: .
-    image: php-mysql-demo:{BUILD_NUMBER} 
+    image: php-mysql-demo:1.0.0 
     networks:
       - frontend
       - backend
