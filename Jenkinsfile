@@ -12,7 +12,7 @@ pipeline{
 
                 script{
                  
-                 git branch: 'main', url: 'https://github.com/VishalTx/innovation-task-php.git'
+                 git branch: 'main', url: 'https://github.com/Aashima-sharma/innovation-task-php.git'
 
                 }
             }
@@ -20,7 +20,7 @@ pipeline{
         stage('Build') {
             steps {
                 // sh 'cd /root/php-mysql-phpmyadmin'
-                sh "docker-compose up -d --build --no-deps --remove-orphans "${env.BUILD_NUMBER}""
+                sh "docker-compose up -d --build --no-deps --remove-orphans ${env.BUILD_NUMBER}"
                 // script {
                 //     // Build the Docker image using Docker Compose
                 //     withEnv(['PATH+DOCKER=/usr/bin']) {
