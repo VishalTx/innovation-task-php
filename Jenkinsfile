@@ -19,7 +19,7 @@ pipeline{
             steps {
                 
               
-                sh "docker-compose up -d --build --no-deps --remove-orphans --build-arg BUILD_NUMBER=${buildNumber}"
+                sh "docker-compose up -d --build  --build-arg BUILD_NUMBER=${buildNumber}"
                 
                 }
             }
