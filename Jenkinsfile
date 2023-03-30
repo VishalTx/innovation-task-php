@@ -10,29 +10,29 @@ pipeline {
             }
         }
         
-//         stage('Tag images') {
+         stage('Tag images') {
+             steps {
+                 script {
+                     sh '''
+                         docker tag mysql:5.7 mysql:$BUILD_NUMBER
+                         docker tag php-mysql-demo:1.0.0 php-mysql-demo:$BUILD_NUMBER
+                         docker tag phpmyadmin/phpmyadmin:4.7 phpmyadmin/phpmyadmin:$BUILD_NUMBER
+                     '''
+                 }
+             }
+         }
+        
+//         stage('Clear space') {
 //             steps {
 //                 script {
 //                     sh '''
-//                         docker tag mysql:5.7 mysql:$BUILD_NUMBER
-//                         docker tag php-mysql-demo:1.0.0 php-mysql-demo:$BUILD_NUMBER
-//                         docker tag phpmyadmin/phpmyadmin:4.7 phpmyadmin/phpmyadmin:$BUILD_NUMBER
+//                         docker rmi mysql:$BUILD_NUMBER
+//                         docker rmi php-mysql-demo:$BUILD_NUMBER
+//                         docker rmi phpmyadmin/phpmyadmin:$BUILD_NUMBER
 //                     '''
 //                 }
 //             }
 //         }
-        
-        stage('Clear space') {
-            steps {
-                script {
-                    sh '''
-                        docker rmi mysql:$BUILD_NUMBER
-                        docker rmi php-mysql-demo:$BUILD_NUMBER
-                        docker rmi phpmyadmin/phpmyadmin:$BUILD_NUMBER
-                    '''
-                }
-            }
-        }
         
         stage('Build') {
             steps {
