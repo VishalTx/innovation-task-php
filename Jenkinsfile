@@ -22,17 +22,17 @@ pipeline {
              }
          }
         
-//         stage('Clear space') {
-//             steps {
-//                 script {
-//                     sh '''
-//                         docker rmi mysql:$BUILD_NUMBER
-//                         docker rmi php-mysql-demo:$BUILD_NUMBER
-//                         docker rmi phpmyadmin/phpmyadmin:$BUILD_NUMBER
-//                     '''
-//                 }
-//             }
-//         }
+        stage('Clear space') {
+            steps {
+                script {
+                    sh '''
+                        docker rmi mysql
+                        docker rmi php-mysql-demo
+                        docker rmi phpmyadmin/phpmyadmin
+                    '''
+                }
+            }
+        }
         
         stage('Build') {
             steps {
