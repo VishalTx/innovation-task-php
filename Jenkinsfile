@@ -23,17 +23,17 @@ pipeline {
          }
         
         stage('Clear space') {
-            steps {
-                script {
-                    sh '''
-                        docker rmi mysql
-                        docker rmi php-mysql-demo
-                        docker rmi phpmyadmin/phpmyadmin
-                    '''
-                }
-            }
+           steps {
+               script {
+                   sh '''
+                       docker rmi mysql:$BUILD_NUMBER-1
+                       docker rmi php-mysql-demo:$BUILD_NUMBER-1
+                       docker rmi phpmyadmin/phpmyadmin:$BUILD_NUMBER-1
+                   '''
+                 }
+             }
         }
-        
+
         stage('Build') {
             steps {
                 sh "docker-compose up -d --build"
