@@ -26,7 +26,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker image prune -f
                         docker rmi mysql:$BUILD_NUMBER
                         docker rmi php-mysql-demo:$BUILD_NUMBER
                         docker rmi phpmyadmin/phpmyadmin:$BUILD_NUMBER
