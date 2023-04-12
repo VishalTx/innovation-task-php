@@ -14,7 +14,6 @@ pipeline {
                 sh 'ls -l ${WORKSPACE}'
             }
         }
-       }
         stage('Build') {
             steps {
                 sh "docker-compose up -d --build"
