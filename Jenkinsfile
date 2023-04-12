@@ -4,7 +4,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    git branch: 'testing', url: 'http://192.168.6.186/root/fullstack-devsecops.git'
+                    git branch: 'main', url: 'https://github.com/Shabnam79/innovation-task-php-devsecops'
                 }
             }
         }
