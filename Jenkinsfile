@@ -8,12 +8,7 @@ pipeline {
                 }
             }
         }
-       stage('PHPCS') {
-            steps {
-                sh 'phpcs fullstack-devsecops --generator=HTML > index.html'
-                sh 'ls -l ${WORKSPACE}'
-            }
-        }
+       
         stage('Build') {
             steps {
                 sh "docker-compose up -d --build"
