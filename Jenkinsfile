@@ -25,7 +25,8 @@ pipeline {
         stage('Test') {
             steps {
                 script{
-                    sh 'java -jar home/ubuntu/innovation-task-php-devsecops/selenium-server-standalone-3.141.59.jar -role hub -port 6001'
+                    sh 'cd /home/ubuntu/innovation-task-php-devsecops'
+                    sh 'java -jar selenium-server-standalone-3.141.59.jar -role hub -port 6001'
                     sh 'php vendor/bin/phpunit test/test.php'
                 }
                 }
