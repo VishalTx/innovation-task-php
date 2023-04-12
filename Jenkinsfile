@@ -12,8 +12,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'Success', stageResult: 'Success') {
                 sh '''
-                ls
-                phpcs innovation-task-php-devsecops
+                phpcs delete.php
                 phpcs --standard=PSR2 --extensions=php --report=summary --report-file=/home/testing/phpcs-output-new innovation-task-php-devsecops '''
             }
         }
