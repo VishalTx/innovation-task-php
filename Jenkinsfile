@@ -26,7 +26,7 @@ pipeline {
             steps {
                 withEnv(['DISPLAY=:1']) {
                     sh 'Xvfb :1 -screen 0 1024x768x24 &'
-                    sh 'php home/ubuntu/innovation-task-php-devsecops/vendor/bin/phpunit test/test.php'
+                    sh 'php vendor/bin/phpunit test/test.php'
                 }
             }
         }
