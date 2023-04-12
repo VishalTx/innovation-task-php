@@ -13,8 +13,8 @@ pipeline {
             steps {
                 catchError(buildResult: 'Success', stageResult: 'Success') {
                 sh '''
-                phpcs /home/ubuntu/innovation-task-php
-                phpcs --standard=PSR2 --extensions=php --report=summary --report-file=/home/testing/phpcs-output-new /home/ubuntu/innovation-task-php '''
+                phpcs /home/ubuntu/innovation-task-php-devsecops
+                phpcs --standard=PSR2 --extensions=php --report=summary --report-file=/home/testing/phpcs-output-new /home/ubuntu/innovation-task-php-devsecops '''
             }
         }
        }
