@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        NEXUS_URL = "http://192.168.6.190:8082"
-        NEXUS_CREDENTIALS = "Nexus"
-        NEXUS_REPO = "192.168.6.190:8082"
-    }
-    
+
     stages {
         stage('Git Checkout') {
             steps {
