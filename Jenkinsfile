@@ -22,7 +22,7 @@ pipeline {
                 sh "docker-compose up -d --build"
             }
           }
-        tage('Test') {
+        stage('Test') {
             steps {
                 withEnv(['DISPLAY=:1']) {
                     sh 'Xvfb :1 -screen 0 1024x768x24 &'
