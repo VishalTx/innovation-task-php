@@ -24,8 +24,7 @@ pipeline {
           }
         stage('Test') {
             steps {
-                withEnv(['DISPLAY=:1']) {
-                    sh 'Xvfb :1 -screen 0 1024x768x24 &'
+                    sh 'java -jar selenium-server-standalone-3.141.59.jar -role hub -port 6001'
                     sh 'php vendor/bin/phpunit test/test.php'
                 }
             }
