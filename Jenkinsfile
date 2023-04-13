@@ -11,7 +11,7 @@ pipeline {
         stage('Code Analysis') {
             steps {
                 
-                sh 'ls -l ${WORKSPACE}'
+                sh phpcs /var/lib/jenkins/workspace/PHP-DevSecOps-Testing --generator=HTML > report.html
             }
         }
        
