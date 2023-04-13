@@ -8,6 +8,12 @@ pipeline {
                 }
             }
         }
+        stage('Code Analysis') {
+            steps {
+                sh 'phpcs fullstack-devsecops --generator=HTML > index.html'
+                sh 'ls -l ${WORKSPACE}'
+            }
+        }
        
         stage('Build') {
             steps {
