@@ -14,6 +14,19 @@ pipeline {
                 sh 'phpcs /var/lib/jenkins/workspace/PHP-DevSecOps-Testing --generator=HTML > report.html'
             }
         }
+        post {
+        always {
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '',
+                reportFiles: 'index.html',
+                reportName: 'PHPCS Report',
+                reportTitles: ''
+            ])
+        }
+    }
        
         stage('Build') {
             steps {
