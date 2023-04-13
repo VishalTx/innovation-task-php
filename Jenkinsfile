@@ -15,17 +15,17 @@ pipeline {
             }
         }
         post {
-        always {
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: '',
-                reportFiles: 'index.html',
-                reportName: 'PHPCS Report',
-                reportTitles: ''
-            ])
-        }
+            always {
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '',
+                    reportFiles: 'index.html',
+                    reportName: 'PHPCS Report',
+                    reportTitles: ''
+                 ])
+          }
     }
        
         stage('Build') {
