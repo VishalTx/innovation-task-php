@@ -15,17 +15,9 @@ pipeline {
             }
         }
         post {
-            always {
-                publishHTML(target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '',
-                    reportFiles: 'index.html',
-                    reportName: 'PHPCS Report',
-                    reportTitles: ''
-                 ])
-          }
+        always {
+            htmlReport dir: '.', files: 'index.html', title: 'PHPCS Report'
+        }
     }
        
         stage('Build') {
