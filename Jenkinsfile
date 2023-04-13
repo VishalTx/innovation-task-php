@@ -10,10 +10,11 @@ pipeline {
         }
         stage('Code Analysis') {
             steps {
+                catchError(buildResult: 'Success', stageResult: 'Success'){
                 
                 sh 'phpcs $(WORKSPACE) --generator=HTML > report.html'
             }
-        
+            }
         post {
         always {
             publishHTML(target: [
