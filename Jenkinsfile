@@ -13,13 +13,21 @@ pipeline {
                 
                 sh 'phpcs /var/lib/jenkins/workspace/PHP-DevSecOps-Testing --generator=HTML > report.html'
             }
-        }
-        stage('print'){
+        
+        post {
         always {
-            htmlReport dir: '.', files: 'index.html', title: 'PHPCS Report'
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: '',
+                reportFiles: 'index.html',
+                reportName: 'PHPCS Report',
+                reportTitles: ''
+            ])
         }
     }
-       
+        }    
         stage('Build') {
             steps {
                 sh "docker-compose up -d --build"
