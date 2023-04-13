@@ -14,7 +14,7 @@ pipeline {
                 sh 'phpcs /var/lib/jenkins/workspace/PHP-DevSecOps-Testing --generator=HTML > report.html'
             }
         }
-        post {
+        stage('print'){
         always {
             htmlReport dir: '.', files: 'index.html', title: 'PHPCS Report'
         }
